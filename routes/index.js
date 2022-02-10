@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
   });
 
 router.get('/trainers', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/pages/Trainers.html'));
+    res.sendFile(path.join(__dirname, '../public/pages/trainers.html'));
 });
 
 router.post('/access', async (req, res, next) => {

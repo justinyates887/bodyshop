@@ -12,7 +12,7 @@ router.get('/trainers', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/pages/trainers.html'));
 });
 
-router.post('/access', async (req, res, next) => {
+router.post('/sendmail', async (req, res, next) => {
   const mailer = await mail(req.body)
   if(!mailer) res.json({ status: 'fail' })
   else res.json({ status: 'success' })

@@ -1,5 +1,6 @@
 {
   "name": "bodyshop",
+  "stage": "development",
   "version": "1.0.0",
   "description": "Website for BodyShop Gym and Training",
   "main": "server.js",

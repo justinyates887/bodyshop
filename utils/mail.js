@@ -1,17 +1,18 @@
 const nodeMailer = require('nodemailer');
-require ('dotenv')
+require ('dotenv').config()
 const pkg = require('../package.json')
 
 const pass = process.env.EMAIL_PASS
 
 async function mail(values) {
+
     const transporter = nodeMailer.createTransport({
-        host: 'localhost',
+        host: "localhost",
         service: 'gmail',
         port: 587,
         secure: pkg.stage == 'development' ? false : true,
-        //requireTLS:true, this is for deployment
-        ignoreTLS: true, // this is for dev
+        requireTLS: pkg.stage == 'development' ? false : true,
+        ignoreTLS: pkg.stage == 'development' ? true : false,
         auth: {
           user: 'associatedpoolsinc@gmail.com',
           pass: `${pass}`
@@ -27,18 +28,14 @@ async function mail(values) {
     });
         
     const mailMessage = {
-        from: 'associatedpoolsinc@gmail.com',
-        to: 'bryan@associatedpoolsinc.com',
-        subject: `Contact form submission by ${values.values.firstName}`,
-        text: `From: ${values.values.firstName} ${values.values.lastName} \n\
-                Email: ${values.values.email} \n\
-                Phone: ${values.values.phone} \n\
-                Project Address: ${values.values.addressOne}\n\
-                ${values.values.addressTwo}\n\
-                City: ${values.values.city}\n\
-                State: ${values.values.state} \n\
-                Zip: ${values.values.zip} \n\
-                Message: ${values.values.message}`
+        from: `associatedpoolsinc@gmail.com`,
+        to: 'justin@associatedpoolsinc.com',
+        subject: `Contact form submission by ${values.name}`,
+        text: `From: ${values.name} \n\
+                Date: ${values.date} \n\
+                Phone: ${values.phone} \n\
+                Email: ${values.email}
+                Message: ${values.message}`
     };
         
     transporter.sendMail(mailMessage, function(error){
